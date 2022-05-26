@@ -41,6 +41,9 @@ const Menu = styled.div`
 const ContainerHabits = styled.div`
   margin-top: 28px;
   padding: 0 17px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
   h4 {
     font: normal 400 17.976px 'Lexend Deca', cursive;

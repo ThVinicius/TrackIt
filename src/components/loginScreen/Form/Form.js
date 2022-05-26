@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { ThreeDots } from 'react-loader-spinner'
 import { UserContext } from '../../providers/auth'
 import { Container } from './styles'
 
@@ -33,7 +34,6 @@ export default function Form() {
         navigate('/habitos')
       })
       .catch(response => {
-        alert(response.data.message)
         setLoading(!loading)
       })
   }
@@ -59,9 +59,21 @@ export default function Form() {
     if (loading === false) return '#FFFFFF'
     return '#F2F2F2'
   }
+  function spinnerLoading() {
+    if (loading === false) return 'Entrar'
+    return <ThreeDots color="#FFFFFF" height={13} width={51} />
+  }
+  function opacityButton() {
+    if (loading === false) return '1'
+    return '0.7'
+  }
 
   return (
-    <Container onSubmit={toSend} color={InputColorLoading()}>
+    <Container
+      onSubmit={toSend}
+      color={InputColorLoading()}
+      opacity={opacityButton()}
+    >
       <input
         type="email"
         id="email"
@@ -80,7 +92,7 @@ export default function Form() {
         value={input.password}
         onChange={e => hanleChangeInputPassword(e.target.value)}
       />
-      <button type="submit">Entrar</button>
+      <button type="submit">{spinnerLoading()}</button>
     </Container>
   )
 }

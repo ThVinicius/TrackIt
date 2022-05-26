@@ -3,17 +3,17 @@ import { useState, useContext } from 'react'
 import { UserContext } from '../../providers/auth'
 import { Container, ContainerCheck, Check, Form, Box } from './styles'
 
-export default function CreateHabits({ setCreateHabits }) {
+export default function CreateHabits({ setAddHabits }) {
   const { user, setUser } = useContext(UserContext)
   const [inputValue, setInputValue] = useState('')
   const [check, setCheck] = useState([
-    { day: 7, state: false },
     { day: 1, state: false },
     { day: 2, state: false },
     { day: 3, state: false },
     { day: 4, state: false },
     { day: 5, state: false },
-    { day: 6, state: false }
+    { day: 6, state: false },
+    { day: 7, state: false }
   ])
 
   function setState(weekday) {
@@ -60,9 +60,16 @@ export default function CreateHabits({ setCreateHabits }) {
       config
     )
     promisse
-      .then(response => {
-        console.log(response)
-        setCreateHabits(false)
+      .then(({ data }) => {
+        console.log(data)
+        setUser({
+          ...user,
+          habits: [
+            ...user.habits,
+            { id: data.id, name: inputValue, days: days }
+          ]
+        })
+        setAddHabits(false)
       })
       .catch(() => {
         alert('Dados incorretos')
@@ -80,30 +87,30 @@ export default function CreateHabits({ setCreateHabits }) {
           onChange={e => setInputValue(e.target.value)}
         />
         <ContainerCheck>
-          <Check check={check[0].state} onClick={() => setState(7)}>
+          <Check check={check[0].state} onClick={() => setState(1)}>
             D
           </Check>
-          <Check check={check[1].state} onClick={() => setState(1)}>
+          <Check check={check[1].state} onClick={() => setState(2)}>
             S
           </Check>
-          <Check check={check[2].state} onClick={() => setState(2)}>
+          <Check check={check[2].state} onClick={() => setState(3)}>
             T
           </Check>
-          <Check check={check[3].state} onClick={() => setState(3)}>
+          <Check check={check[3].state} onClick={() => setState(4)}>
             Q
           </Check>
-          <Check check={check[4].state} onClick={() => setState(4)}>
+          <Check check={check[4].state} onClick={() => setState(5)}>
             Q
           </Check>
-          <Check check={check[5].state} onClick={() => setState(5)}>
+          <Check check={check[5].state} onClick={() => setState(6)}>
             S
           </Check>
-          <Check check={check[6].state} onClick={() => setState(6)}>
+          <Check check={check[6].state} onClick={() => setState(7)}>
             S
           </Check>
         </ContainerCheck>
         <Box>
-          <h6 onClick={() => setCreateHabits(false)}>Cancelar</h6>
+          <h6 onClick={() => setAddHabits(false)}>Cancelar</h6>
           <button type="submit">Salvar</button>
         </Box>
       </Form>

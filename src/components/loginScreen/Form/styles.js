@@ -27,6 +27,10 @@ const Container = styled.form`
     color: #ffffff;
     font: normal 400 20.976px 'Lexend Deca', sans-serif;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: ${props => props.opacity};
   }
 `
 export { Container }

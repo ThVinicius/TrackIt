@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from 'react'
 import { UserContext } from '../../providers/auth'
 import axios from 'axios'
+import { ThreeCircles } from 'react-loader-spinner'
 import Header from '../../shared/Header/Header'
 import Footer from '../../shared/Footer/Footer'
 import UserHabits from '../UserHabits/UserHabits'
@@ -10,7 +11,6 @@ import { Container, Content, Menu, ContainerHabits } from './styles'
 export default function Habits() {
   const { user, setUser } = useContext(UserContext)
   const [addHabits, setAddHabits] = useState(false)
-  console.log(user)
 
   useEffect(() => {
     const config = {
@@ -30,11 +30,8 @@ export default function Habits() {
         user.habits.forEach((item, index, array) => {
           array[index].days = item.days.sort((a, b) => a - b)
         })
-        console.log(user)
       })
-      .catch(() => {
-        // alert('Não foi possível exibir a lista de hábitos')
-      })
+      .catch(() => {})
   }, [])
 
   function createHabits() {
@@ -44,6 +41,15 @@ export default function Habits() {
 
   function userHabits() {
     if (user.habits === undefined) {
+      return (
+        <ThreeCircles
+          color="blue"
+          height={110}
+          width={110}
+          ariaLabel="three-circles-rotating"
+        />
+      )
+    } else if (user.habits.length === 0) {
       return (
         <h4>
           Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para

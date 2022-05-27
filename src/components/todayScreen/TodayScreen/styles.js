@@ -27,6 +27,9 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 41px;
 `
 
 const BoxDiv = styled.div`

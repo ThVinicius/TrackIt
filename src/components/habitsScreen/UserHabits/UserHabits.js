@@ -3,6 +3,12 @@ import { useState, useContext } from 'react'
 import { UserContext } from '../../providers/auth'
 import { Container, ContainerCheck, Check, Icon } from './styles'
 
+const confirm = user => {
+  return window.confirm(
+    `O hábito -- ${user.name} -- será deletado.\nVocê confirma essa ação?`
+  )
+}
+
 function userHabits(user) {
   user.days = user.days.sort((a, b) => a - b)
 
@@ -33,6 +39,8 @@ export default function UserHabits({ user }) {
   }
 
   const deleteHabit = () => {
+    if (confirm(user) === false) return
+
     const config = {
       headers: {
         Authorization: `Bearer ${token.token}`

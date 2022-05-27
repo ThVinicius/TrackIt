@@ -48,6 +48,7 @@ const ContainerHabits = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center;
 
   h4 {
     font: normal 400 17.976px 'Lexend Deca', cursive;

@@ -10,7 +10,6 @@ import Habits from '../Habits/Habits'
 import { Container, Content, BoxDiv, BoxHabits } from './styles'
 
 const now = dayjs().locale('pt-br')
-// const weekday = now.format('dddd')
 const date = now.format('DD/MM')
 
 function weekday() {
@@ -20,7 +19,10 @@ function weekday() {
 
 export default function TodayScreen() {
   const { user } = useContext(UserContext)
-  const [listHabits, setListHabits] = useState([])
+  const [listHabits, setListHabits] = useState({
+    exist: undefined,
+    list: []
+  })
 
   useEffect(() => {
     const URL =
@@ -31,8 +33,11 @@ export default function TodayScreen() {
 
     promisse
       .then(response => {
-        console.log(response)
-        setListHabits(response.data)
+        if (response.data.length === 0) {
+          setListHabits({ ...listHabits, exist: false })
+        } else {
+          setListHabits({ ...listHabits, exist: true, list: response.data })
+        }
       })
       .catch(() => {
         console.log('deu ruim')
@@ -41,13 +46,14 @@ export default function TodayScreen() {
 
   const completedHabits = () => {
     let cont = 0
-    listHabits.forEach(item => {
+    listHabits.list.forEach(item => {
       if (item.done === true) cont++
     })
     if (cont > 0) {
       return (
         <h5>
-          {parseInt((cont / listHabits.length) * 100)}% dos hábitos concluídos
+          {parseInt((cont / listHabits.list.length) * 100)}% dos hábitos
+          concluídos
         </h5>
       )
     }
@@ -55,17 +61,17 @@ export default function TodayScreen() {
   }
   function progressBar() {
     let cont = 0
-    listHabits.forEach(item => {
+    listHabits.list.forEach(item => {
       if (item.done === true) cont++
     })
     if (cont > 0) {
-      return parseInt((cont / listHabits.length) * 100)
+      return parseInt((cont / listHabits.list.length) * 100)
     }
     return cont
   }
 
   const habits = () => {
-    if (listHabits.length === 0) {
+    if (listHabits.exist === undefined) {
       return (
         <ThreeCircles
           color="blue"
@@ -74,16 +80,18 @@ export default function TodayScreen() {
           ariaLabel="three-circles-rotating"
         />
       )
-    } else {
-      return listHabits.map((item, index) => (
-        <Habits
-          key={index}
-          data={item}
-          setListHabits={setListHabits}
-          listHabits={listHabits}
-        />
-      ))
+    } else if (listHabits.exist === false) {
+      return <h6>Você não possui hábitos hoje</h6>
     }
+
+    return listHabits.list.map((item, index) => (
+      <Habits
+        key={index}
+        data={item}
+        setListHabits={setListHabits}
+        listHabits={listHabits}
+      />
+    ))
   }
 
   return (

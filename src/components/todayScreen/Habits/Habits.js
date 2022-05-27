@@ -5,66 +5,50 @@ import { ContainerHabits, Box, CheckBox, Current, Highest } from './styles'
 
 export default function Habits({ data, setListHabits, listHabits }) {
   const { user } = useContext(UserContext)
-  const [habits, setHabits] = useState({
+  const [habits] = useState({
     id: data.id,
     currentSequence: data.currentSequence,
     done: data.done,
     highestSequence: data.highestSequence
   })
 
-  const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${data.id}`
-  const config = { headers: { Authorization: `Bearer ${user.token}` } }
-
   function checkHabits() {
+    const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${data.id}`
+    const config = { headers: { Authorization: `Bearer ${user.token}` } }
+
     const { done, currentSequence, highestSequence } = habits
     if (done === false) {
       const promisse = axios.post(`${URL}/check`, null, config)
-      promisse
-        .then(() => {
-          console.log('check')
-        })
-        .catch(() => {
-          console.log('deu ruim')
-        })
+      promisse.then(() => {})
 
-      setHabits({
-        id: data.id,
-        currentSequence: currentSequence + 1,
-        done: true,
-        highestSequence: highestSequence + 1
-      })
-      setListHabits(
-        listHabits.map(item => {
+      habits.currentSequence = currentSequence + 1
+      habits.done = true
+      habits.highestSequence = highestSequence + 1
+
+      setListHabits({
+        ...listHabits,
+        list: listHabits.list.map(item => {
           const { done } = item
           if (item.id === habits.id) item.done = !done
           return item
         })
-      )
-      console.log(listHabits)
+      })
     } else {
       const promisse = axios.post(`${URL}/uncheck`, null, config)
-      promisse
-        .then(() => {
-          console.log('uncheck')
-        })
-        .catch(() => {
-          console.log('deu ruim')
-        })
+      promisse.then(() => {})
 
-      setHabits({
-        id: data.id,
-        currentSequence: currentSequence - 1,
-        done: false,
-        highestSequence: highestSequence - 1
-      })
-      setListHabits(
-        listHabits.map(item => {
+      habits.currentSequence = currentSequence - 1
+      habits.done = false
+      habits.highestSequence = highestSequence - 1
+
+      setListHabits({
+        ...listHabits,
+        list: listHabits.list.map(item => {
           const { done } = item
           if (item.id === habits.id) item.done = !done
           return item
         })
-      )
-      console.log(listHabits)
+      })
     }
   }
 

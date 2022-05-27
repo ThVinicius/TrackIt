@@ -28,13 +28,14 @@ export default function Form() {
       body
     )
     promisse
-      .then(response => {
-        console.log(response)
-        user.image = response.data.image
-        user.token = response.data.token
+      .then(res => {
+        user.image = res.data.image
+        user.token = res.data.token
+        const dadosSerializados = JSON.stringify(res.data.token)
+        localStorage.setItem('token', dadosSerializados)
         navigate('/habitos')
       })
-      .catch(response => {
+      .catch(() => {
         setLoading(!loading)
       })
   }

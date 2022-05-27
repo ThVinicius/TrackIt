@@ -30,6 +30,7 @@ const CheckBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   ion-icon {
     color: #ffffff;

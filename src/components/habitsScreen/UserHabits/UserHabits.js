@@ -3,20 +3,25 @@ import { useState, useContext } from 'react'
 import { UserContext } from '../../providers/auth'
 import { Container, ContainerCheck, Check, Icon } from './styles'
 
-export default function UserHabits({ user }) {
-  const [check] = useState([])
-  const { user: token, setUser } = useContext(UserContext)
+function userHabits(user) {
   user.days = user.days.sort((a, b) => a - b)
 
+  const array = []
   let aux = 0
   for (let i = 1; i <= 7; i++) {
     if (user.days[aux] === i) {
-      check.push({ day: i, state: true })
+      array.push({ day: i, state: true })
       aux++
     } else {
-      check.push({ day: i, state: false })
+      array.push({ day: i, state: false })
     }
   }
+  return array
+}
+
+export default function UserHabits({ user }) {
+  const [check] = useState(userHabits(user))
+  const { user: token, setUser } = useContext(UserContext)
 
   function backGroundColor(index) {
     if (check[index].state === false) return '#FFFFFF'
@@ -41,13 +46,12 @@ export default function UserHabits({ user }) {
 
     promisse
       .then(() => {
-        setUser(user.filter(item => item.id !== user.id))
-        console.log(user)
+        setUser({
+          ...token,
+          habits: token.habits.filter(item => item.id !== user.id)
+        })
       })
-      .catch(() => {
-        console.log('não deletou')
-        console.log(config)
-      })
+      .catch(() => {})
   }
 
   return (
@@ -55,25 +59,25 @@ export default function UserHabits({ user }) {
       <div>
         <h6>{user.name}</h6>
         <ContainerCheck>
-          <Check color={color(0)} backGroundColor={backGroundColor(0)}>
+          <Check color={color(6)} backGroundColor={backGroundColor(6)}>
             D
           </Check>
-          <Check color={color(1)} backGroundColor={backGroundColor(1)}>
+          <Check color={color(0)} backGroundColor={backGroundColor(0)}>
             S
           </Check>
-          <Check color={color(2)} backGroundColor={backGroundColor(2)}>
+          <Check color={color(1)} backGroundColor={backGroundColor(1)}>
             T
+          </Check>
+          <Check color={color(2)} backGroundColor={backGroundColor(2)}>
+            Q
           </Check>
           <Check color={color(3)} backGroundColor={backGroundColor(3)}>
             Q
           </Check>
           <Check color={color(4)} backGroundColor={backGroundColor(4)}>
-            Q
-          </Check>
-          <Check color={color(5)} backGroundColor={backGroundColor(5)}>
             S
           </Check>
-          <Check color={color(6)} backGroundColor={backGroundColor(6)}>
+          <Check color={color(5)} backGroundColor={backGroundColor(5)}>
             S
           </Check>
         </ContainerCheck>

@@ -33,7 +33,7 @@ const Form = styled.form`
     height: 45px;
     border: 1px solid #d5d5d5;
     border-radius: 5px;
-    background-color: #ffffff;
+    background-color: ${props => props.color};
     font: normal 400 19.976px 'Lexend Deca', cursive;
     color: #666666;
     padding-left: 11px;
@@ -57,6 +57,7 @@ const Box = styled.div`
   h6 {
     font: normal 400 15.976px 'Lexend Deca', cursive;
     color: #52b6ff;
+    cursor: pointer;
   }
 
   button {
@@ -66,6 +67,10 @@ const Box = styled.div`
     border-radius: 4.63636px;
     color: #ffffff;
     font: normal 400 15.976px 'Lexend Deca', cursive;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `
 export { Container, ContainerCheck, Check, Form, Box }

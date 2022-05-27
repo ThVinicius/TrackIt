@@ -9,5 +9,10 @@ const GlobalStyle = createGlobalStyle`
   button{
     border: none;
   }
+
+  a{
+    text-decoration: none;
+    color: inherit;
+  }
 `
 export default GlobalStyle

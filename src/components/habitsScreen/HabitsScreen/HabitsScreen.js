@@ -1,7 +1,6 @@
 import { useContext, useState, useEffect } from 'react'
 import { UserContext } from '../../providers/auth'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import Header from '../../shared/Header/Header'
 import Footer from '../../shared/Footer/Footer'
 import UserHabits from '../UserHabits/UserHabits'
@@ -70,9 +69,7 @@ export default function Habits() {
           {userHabits()}
         </ContainerHabits>
       </Content>
-      <Link to="/hoje">
-        <Footer value={66} text={'Hoje'} />
-      </Link>
+      <Footer value={66} text={'Hoje'} />
     </Container>
   )
 }

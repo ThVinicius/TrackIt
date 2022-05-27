@@ -13,6 +13,9 @@ const Content = styled.div`
   height: 79.02vh;
   background-color: #e8e8e8;
   padding-top: 20px;
+  padding-bottom: 36px;
+  overflow: auto;
+  overflow-x: hidden;
 `
 const Menu = styled.div`
   width: 375px;
@@ -36,6 +39,7 @@ const Menu = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
 `
 const ContainerHabits = styled.div`

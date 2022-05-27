@@ -41,5 +41,10 @@ const BoxDiv = styled.div`
     color: #8fc549;
   }
 `
+const BoxHabits = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`
 
-export { Container, Content, BoxDiv }
+export { Container, Content, BoxDiv, BoxHabits }

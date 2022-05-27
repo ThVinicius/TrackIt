@@ -15,6 +15,7 @@ export default function Form() {
   })
   const toSend = event => {
     event.preventDefault()
+    if (loading === true) return
     setLoading(!loading)
 
     const body = {

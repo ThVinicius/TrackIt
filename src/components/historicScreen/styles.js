@@ -27,4 +27,28 @@ const Content = styled.div`
   }
 `
 
-export { Container, Content }
+const CalendarContainer = styled.div`
+  /* .react-calendar {
+    width: 400px;
+    max-width: 100%;
+    background-color: #fff;
+    color: #222;
+
+    border-radius: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.125em;
+  }
+  /* .react-calendar__tile--now {
+    background: pink;
+  } */
+  /* .react-calendar__tile--hasActive {
+    border-radius: 55px;
+    height: 44px;
+    background-color: #dfdfdf;
+  }
+  abbr[title] {
+    text-decoration: none;
+  } */
+`
+
+export { Container, Content, CalendarContainer }

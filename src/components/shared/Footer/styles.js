@@ -6,7 +6,7 @@ const Container = styled.footer`
   height: 10.49vh;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   padding: 0 31px;
   background-color: #ffffff;
 
@@ -19,6 +19,11 @@ const Container = styled.footer`
 const Progressbar = styled(CircularProgressbar)`
   width: 91px;
   height: 91px;
-  margin-bottom: 45px;
 `
-export { Container, Progressbar }
+
+const Box = styled.div`
+  height: 10.49vh;
+  display: flex;
+  align-items: center;
+`
+export { Container, Progressbar, Box }

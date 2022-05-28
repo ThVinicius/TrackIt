@@ -6,6 +6,10 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  html, body{
+    overflow-x: hidden;
+  }
+
   button{
     border: none;
   }

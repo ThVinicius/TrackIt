@@ -6,7 +6,7 @@ import LoginScreen from './loginScreen/LoginScreen/LoginScreen'
 import RegisterScreen from './registerScreen/RegisterScreen/RegisterScreen'
 import HabitsScreen from './habitsScreen/HabitsScreen/HabitsScreen'
 import TodayScreen from './todayScreen/TodayScreen/TodayScreen'
-import HistoricScreen from './historicScreen/HistoricScreen'
+import HistoricScreen from './historicScreen/HistoricScreen/HistoricScreen'
 import { AuthProvider } from './providers/auth'
 
 export default function App() {

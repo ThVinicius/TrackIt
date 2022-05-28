@@ -9,7 +9,8 @@ export default function Habits({ data, setListHabits, listHabits }) {
     id: data.id,
     currentSequence: data.currentSequence,
     done: data.done,
-    highestSequence: data.highestSequence
+    highestSequence: data.highestSequence,
+    sequence: data.sequence
   })
 
   function checkHabits() {
@@ -21,9 +22,14 @@ export default function Habits({ data, setListHabits, listHabits }) {
       const promisse = axios.post(`${URL}/check`, null, config)
       promisse.then(() => {})
 
-      habits.currentSequence = currentSequence + 1
       habits.done = true
-      habits.highestSequence = highestSequence + 1
+
+      if (habits.sequence === true) {
+        habits.currentSequence = currentSequence + 1
+        habits.highestSequence = highestSequence + 1
+      } else {
+        habits.currentSequence = currentSequence + 1
+      }
 
       setListHabits({
         ...listHabits,
@@ -37,9 +43,14 @@ export default function Habits({ data, setListHabits, listHabits }) {
       const promisse = axios.post(`${URL}/uncheck`, null, config)
       promisse.then(() => {})
 
-      habits.currentSequence = currentSequence - 1
       habits.done = false
-      habits.highestSequence = highestSequence - 1
+
+      if (habits.sequence === true) {
+        habits.currentSequence = currentSequence - 1
+        habits.highestSequence = highestSequence - 1
+      } else {
+        habits.currentSequence = currentSequence - 1
+      }
 
       setListHabits({
         ...listHabits,

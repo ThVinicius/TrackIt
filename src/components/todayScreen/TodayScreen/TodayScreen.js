@@ -36,13 +36,25 @@ export default function TodayScreen() {
         if (response.data.length === 0) {
           setListHabits({ ...listHabits, exist: false })
         } else {
-          setListHabits({ ...listHabits, exist: true, list: response.data })
+          setListHabits({
+            ...listHabits,
+            exist: true,
+            list: response.data.map(item => {
+              if (item.currentSequence === item.highestSequence) {
+                item.sequence = true
+              } else {
+                item.sequence = false
+              }
+              return item
+            })
+          })
         }
       })
       .catch(() => {
         console.log('deu ruim')
       })
   }, [])
+  console.log(listHabits)
 
   const completedHabits = () => {
     let cont = 0

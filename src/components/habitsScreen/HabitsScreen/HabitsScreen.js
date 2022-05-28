@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from 'react'
 import { UserContext } from '../../providers/auth'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import { ThreeCircles } from 'react-loader-spinner'
 import Header from '../../shared/Header/Header'
 import Footer from '../../shared/Footer/Footer'
@@ -9,6 +10,7 @@ import CreateHabits from '../CreateHabits/CreateHabits'
 import { Container, Content, Menu, ContainerHabits } from './styles'
 
 export default function Habits() {
+  const navigate = useNavigate()
   const { user, setUser } = useContext(UserContext)
   const [addHabits, setAddHabits] = useState(false)
 
@@ -31,7 +33,9 @@ export default function Habits() {
           array[index].days = item.days.sort((a, b) => a - b)
         })
       })
-      .catch(() => {})
+      .catch(() => {
+        navigate('/')
+      })
   }, [])
 
   function createHabits() {

@@ -15,8 +15,13 @@ const Content = styled.div`
   background-color: #e8e8e8;
   padding-top: 20px;
   padding: 0 17px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   h5 {
+    width: 375px;
+    padding: 0 17px;
     font: normal 400 22.976px 'Lexend Deca', cursive;
     color: #126ba5;
     margin: 17px 0;
@@ -28,6 +33,47 @@ const Content = styled.div`
 `
 
 const CalendarContainer = styled.div`
+  .react-calendar {
+    margin: 0 auto;
+    border: none;
+    box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.15);
+    /* .complete {
+      background-color: var(--green-done);
+      color: #fff;
+    }
+    .incomplete {
+      background-color: var(--red-incomplete);
+      color: #fff;
+    } */
+    /* &__month-view__days__day {
+      border-radius: 17px;
+      max-width: 34px;
+      max-height: 34px;
+      margin: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    } */
+    /* &__tile--now {
+      background-color: var(--blue-light) !important ;
+      color: #fff !important;
+    } */
+    /* &__tile--active {
+      background-color: var(--blue-dark) !important;
+    } */
+
+    .fail {
+      background-color: red;
+      color: #ffffff;
+      border-radius: 100px;
+    }
+    .success {
+      background-color: green;
+      color: #ffffff;
+      border-radius: 100px;
+    }
+  }
+
   /* .react-calendar {
     width: 400px;
     max-width: 100%;

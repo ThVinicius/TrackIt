@@ -19,6 +19,7 @@ const Container = styled.header`
     width: 51px;
     height: 51px;
     border-radius: 98.5px;
+    cursor: pointer;
   }
 `
 export { Container }

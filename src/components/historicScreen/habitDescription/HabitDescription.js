@@ -1,6 +1,6 @@
-import { Box } from './style'
+import { Box, Container } from './style'
 
-export default function HabitDescription({ name, done }) {
+function UserHabits({ name, done }) {
   const icon = () => {
     if (done === false) {
       return <ion-icon name="close-circle"></ion-icon>
@@ -9,8 +9,8 @@ export default function HabitDescription({ name, done }) {
   }
 
   const color = () => {
-    if (done === false) return 'red'
-    return 'green'
+    if (done === false) return '#ea5767'
+    return '#8cc655'
   }
 
   return (
@@ -19,4 +19,22 @@ export default function HabitDescription({ name, done }) {
       {icon()}
     </Box>
   )
+}
+
+export default function HabitDescription({ day }) {
+  const render = () => {
+    if (day.click === true) {
+      return (
+        <Container>
+          <h3>{day.name}</h3>
+          {day.list.map((item, index) => (
+            <UserHabits key={index} done={item.done} name={item.name} />
+          ))}
+        </Container>
+      )
+    }
+    return <></>
+  }
+
+  return render()
 }

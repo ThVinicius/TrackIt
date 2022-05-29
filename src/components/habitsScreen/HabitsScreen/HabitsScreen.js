@@ -38,11 +38,6 @@ export default function Habits() {
       })
   }, [])
 
-  function createHabits() {
-    if (addHabits === false) return null
-    return <CreateHabits setAddHabits={setAddHabits} />
-  }
-
   function userHabits() {
     if (user.habits === undefined) {
       return (
@@ -64,6 +59,11 @@ export default function Habits() {
     return user.habits.map((item, index) => (
       <UserHabits user={item} key={index} />
     ))
+  }
+
+  function createHabits() {
+    if (addHabits === false) return null
+    return <CreateHabits setAddHabits={setAddHabits} />
   }
 
   return (

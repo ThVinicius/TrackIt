@@ -9,7 +9,7 @@ export default function CreateHabits({ setAddHabits }) {
   const [inputValue, setInputValue] = useState('')
   const [loading, setLoading] = useState({ value: false })
   const [check, setCheck] = useState([
-    { day: 7, state: false },
+    { day: 0, state: false },
     { day: 1, state: false },
     { day: 2, state: false },
     { day: 3, state: false },
@@ -57,7 +57,6 @@ export default function CreateHabits({ setAddHabits }) {
         Authorization: `Bearer ${user.token}`
       }
     }
-    console.log(body)
 
     const promisse = axios.post(
       'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits',
@@ -66,7 +65,6 @@ export default function CreateHabits({ setAddHabits }) {
     )
     promisse
       .then(({ data }) => {
-        console.log(data)
         setUser({
           ...user,
           habits: [
@@ -112,7 +110,7 @@ export default function CreateHabits({ setAddHabits }) {
           onChange={e => setInputValue(e.target.value)}
         />
         <ContainerCheck>
-          <Check check={check[0].state} onClick={() => checkClick(7)}>
+          <Check check={check[0].state} onClick={() => checkClick(0)}>
             D
           </Check>
           <Check check={check[1].state} onClick={() => checkClick(1)}>

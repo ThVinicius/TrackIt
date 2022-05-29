@@ -14,7 +14,7 @@ function userHabits(user) {
 
   const array = []
   let aux = 0
-  for (let i = 1; i <= 7; i++) {
+  for (let i = 0; i < 7; i++) {
     if (user.days[aux] === i) {
       array.push({ day: i, state: true })
       aux++
@@ -67,25 +67,25 @@ export default function UserHabits({ user }) {
       <div>
         <h6>{user.name}</h6>
         <ContainerCheck>
-          <Check color={color(6)} backGroundColor={backGroundColor(6)}>
+          <Check color={color(0)} backGroundColor={backGroundColor(0)}>
             D
           </Check>
-          <Check color={color(0)} backGroundColor={backGroundColor(0)}>
+          <Check color={color(1)} backGroundColor={backGroundColor(1)}>
             S
           </Check>
-          <Check color={color(1)} backGroundColor={backGroundColor(1)}>
-            T
-          </Check>
           <Check color={color(2)} backGroundColor={backGroundColor(2)}>
-            Q
+            T
           </Check>
           <Check color={color(3)} backGroundColor={backGroundColor(3)}>
             Q
           </Check>
           <Check color={color(4)} backGroundColor={backGroundColor(4)}>
-            S
+            Q
           </Check>
           <Check color={color(5)} backGroundColor={backGroundColor(5)}>
+            S
+          </Check>
+          <Check color={color(6)} backGroundColor={backGroundColor(6)}>
             S
           </Check>
         </ContainerCheck>

@@ -7,13 +7,7 @@ import dayjs from 'dayjs'
 import Footer from '../../shared/Footer/Footer'
 import Header from '../../shared/Header/Header'
 import HabitDescription from '../habitDescription/HabitDescription'
-import {
-  Container,
-  Content,
-  CalendarContainer,
-  Box,
-  Description
-} from './styles'
+import { Container, Content, CalendarContainer } from './styles'
 
 const getFormatedDate = dateValue => dayjs(dateValue).format('DD/MM/YYYY')
 
@@ -55,7 +49,6 @@ export default function HistoricScreen() {
       })
     })
   }, [])
-  console.log(habitDate)
 
   function tileClassName({ date, view }) {
     if (view === 'month') {
@@ -73,18 +66,6 @@ export default function HistoricScreen() {
         return status ? 'success' : 'fail'
       }
     }
-  }
-
-  const userHabits = (name, array) => {
-    if (habit.click === false) return null
-    return (
-      <Description>
-        <h3>{name}</h3>
-        {array.map((item, index) => (
-          <HabitDescription key={index} done={item.done} name={item.name} />
-        ))}
-      </Description>
-    )
   }
 
   function clickDay(day) {
@@ -125,7 +106,7 @@ export default function HistoricScreen() {
             onClickDay={value => clickDay(value)}
           />
         </CalendarContainer>
-        {userHabits(habit.name, habit.list)}
+        <HabitDescription day={habit} />
       </Content>
       <Footer value={66} text={'Hoje'} />
     </Container>

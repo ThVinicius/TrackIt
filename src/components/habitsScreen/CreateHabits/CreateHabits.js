@@ -1,8 +1,12 @@
 import axios from 'axios'
 import { useState, useContext } from 'react'
+import 'dayjs/locale/pt-br'
+import dayjs from 'dayjs'
 import { UserContext } from '../../providers/auth'
 import { ThreeDots } from 'react-loader-spinner'
 import { Container, ContainerCheck, Check, Form, Box } from './styles'
+
+const today = Number(dayjs().locale('pt-br').format('d'))
 
 function progressBar(array) {
   let cont = 0
@@ -80,18 +84,19 @@ export default function CreateHabits({ setAddHabits }) {
           ...user.habits,
           { id: data.id, name: inputValue, days: days }
         ]
-        user.todayHabits.list = [
-          ...user.todayHabits.list,
-          { id: data.id, done: false }
-        ]
 
-        setUser({
-          ...user,
-          todayHabits: {
-            ...user.todayHabits,
-            progress: progressBar(user.todayHabits.list)
-          }
+        let day = false
+        days.find(item => {
+          if (item === today) day = true
         })
+
+        if (day === true) {
+          user.todayHabits.list = [
+            ...user.todayHabits.list,
+            { id: data.id, done: false }
+          ]
+          user.todayHabits.progress = progressBar(user.todayHabits.list)
+        }
 
         setAddHabits(false)
         loading.value = false

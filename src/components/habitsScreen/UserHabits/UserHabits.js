@@ -77,20 +77,6 @@ export default function UserHabits({ user }) {
             progress: progressBar(token.todayHabits.list)
           }
         })
-
-        // setUser({
-        //   ...token,
-        //   habits: token.habits.filter(item => item.id !== user.id),
-        //   todayHabits: {
-        //     ...token.todayHabits,
-        //     list: token.todayHabits.list.filter(item => item.id !== user.id)
-        //   }
-        // })
-
-        // setUser({
-        //   ...token,
-        //   habits: token.habits.filter(item => item.id !== user.id)
-        // })
       })
       .catch(() => {})
   }

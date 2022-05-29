@@ -6,12 +6,23 @@ import Calendar from 'react-calendar'
 import dayjs from 'dayjs'
 import Footer from '../../shared/Footer/Footer'
 import Header from '../../shared/Header/Header'
-import { Container, Content, CalendarContainer } from './styles'
+import HabitDescription from '../habitDescription/HabitDescription'
+import {
+  Container,
+  Content,
+  CalendarContainer,
+  Box,
+  Description
+} from './styles'
 
 const getFormatedDate = dateValue => dayjs(dateValue).format('DD/MM/YYYY')
 
 export default function HistoricScreen() {
-  const [habit, setHabit] = useState()
+  const [habit, setHabit] = useState({
+    click: false,
+    name: undefined,
+    list: []
+  })
   const [habitDate, setHabitDate] = useState({
     list: [],
     check: []
@@ -64,11 +75,43 @@ export default function HistoricScreen() {
     }
   }
 
+  const userHabits = (name, array) => {
+    if (habit.click === false) return null
+    return (
+      <Description>
+        <h3>{name}</h3>
+        {array.map((item, index) => (
+          <HabitDescription key={index} done={item.done} name={item.name} />
+        ))}
+      </Description>
+    )
+  }
+
   function clickDay(day) {
     const formatDay = getFormatedDate(day)
-    const dayClick = habitDate.list.find(item => item.day === formatDay)
+    let date = undefined
+    let find = undefined
+    let index = undefined
 
-    if (dayClick !== undefined) console.log('oi')
+    habitDate.list.find((item, i) => {
+      if (item.day === formatDay) {
+        date = item.day
+        find = true
+        index = i
+      }
+      return null
+    })
+
+    if (find !== undefined) {
+      setHabit({
+        ...habit,
+        click: true,
+        list: habitDate.list[index].habits,
+        name: date
+      })
+    } else {
+      setHabit({ ...habit, click: false })
+    }
   }
 
   return (
@@ -82,6 +125,7 @@ export default function HistoricScreen() {
             onClickDay={value => clickDay(value)}
           />
         </CalendarContainer>
+        {userHabits(habit.name, habit.list)}
       </Content>
       <Footer value={66} text={'Hoje'} />
     </Container>

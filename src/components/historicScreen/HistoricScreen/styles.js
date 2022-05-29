@@ -18,6 +18,9 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 36px;
+  overflow: auto;
+  overflow-x: hidden;
 
   h5 {
     width: 375px;
@@ -96,5 +99,21 @@ const CalendarContainer = styled.div`
     text-decoration: none;
   } */
 `
+const Description = styled.div`
+  background-color: #ffffff;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8px;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 15px;
 
-export { Container, Content, CalendarContainer }
+  h3 {
+    font: normal 400 19.976px 'Lexend Deca', cursive;
+    color: #126ba5;
+  }
+`
+
+export { Container, Content, CalendarContainer, Description }

@@ -9,23 +9,34 @@ import UserHabits from '../UserHabits/UserHabits'
 import CreateHabits from '../CreateHabits/CreateHabits'
 import { Container, Content, Menu, ContainerHabits } from './styles'
 
+function progressBar(array) {
+  let cont = 0
+  array.forEach(item => {
+    if (item.done === true) cont++
+  })
+  if (cont > 0) {
+    return parseInt((cont / array.length) * 100)
+  }
+  return cont
+}
+
 export default function Habits() {
   const navigate = useNavigate()
   const { user, setUser } = useContext(UserContext)
   const [addHabits, setAddHabits] = useState(false)
 
   useEffect(() => {
+    const URL =
+      'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits'
+
     const config = {
       headers: {
         Authorization: `Bearer ${user.token}`
       }
     }
-    const promisse = axios.get(
-      'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits',
-      config
-    )
+    const promisse1 = axios.get(URL, config)
 
-    promisse
+    promisse1
       .then(response => {
         user.habits = response.data
         setUser({ ...user, habits: response.data })
@@ -36,13 +47,34 @@ export default function Habits() {
       .catch(() => {
         navigate('/')
       })
+
+    const promisse2 = axios.get(`${URL}/today`, config)
+
+    promisse2
+      .then(res => {
+        setUser({
+          ...user,
+          todayHabits: {
+            progress: progressBar(res.data),
+            list: res.data.map(item => {
+              if (item.currentSequence === item.highestSequence) {
+                item.sequence = true
+              } else {
+                item.sequence = false
+              }
+              return item
+            })
+          }
+        })
+      })
+      .catch(() => {})
   }, [])
 
   function userHabits() {
     if (user.habits === undefined) {
       return (
         <ThreeCircles
-          color="blue"
+          color="#52B6FF"
           height={110}
           width={110}
           ariaLabel="three-circles-rotating"
@@ -68,7 +100,7 @@ export default function Habits() {
 
   return (
     <Container>
-      <Header image={user.image} />
+      <Header />
       <Content>
         <Menu>
           <h4>Meus hábitos</h4>
@@ -79,7 +111,7 @@ export default function Habits() {
           {userHabits()}
         </ContainerHabits>
       </Content>
-      <Footer value={66} text={'Hoje'} />
+      <Footer />
     </Container>
   )
 }

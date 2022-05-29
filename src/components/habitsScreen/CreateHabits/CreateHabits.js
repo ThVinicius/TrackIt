@@ -4,6 +4,17 @@ import { UserContext } from '../../providers/auth'
 import { ThreeDots } from 'react-loader-spinner'
 import { Container, ContainerCheck, Check, Form, Box } from './styles'
 
+function progressBar(array) {
+  let cont = 0
+  array.forEach(item => {
+    if (item.done === true) cont++
+  })
+  if (cont > 0) {
+    return parseInt((cont / array.length) * 100)
+  }
+  return cont
+}
+
 export default function CreateHabits({ setAddHabits }) {
   const { user, setUser } = useContext(UserContext)
   const [inputValue, setInputValue] = useState('')
@@ -65,13 +76,23 @@ export default function CreateHabits({ setAddHabits }) {
     )
     promisse
       .then(({ data }) => {
+        user.habits = [
+          ...user.habits,
+          { id: data.id, name: inputValue, days: days }
+        ]
+        user.todayHabits.list = [
+          ...user.todayHabits.list,
+          { id: data.id, done: false }
+        ]
+
         setUser({
           ...user,
-          habits: [
-            ...user.habits,
-            { id: data.id, name: inputValue, days: days }
-          ]
+          todayHabits: {
+            ...user.todayHabits,
+            progress: progressBar(user.todayHabits.list)
+          }
         })
+
         setAddHabits(false)
         loading.value = false
       })

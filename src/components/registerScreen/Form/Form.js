@@ -30,7 +30,7 @@ export default function Form() {
       body
     )
     promisse
-      .then(response => {
+      .then(() => {
         alert('Cadastro realizado com sucesso')
         loading.value = false
         navigate('/')

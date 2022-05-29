@@ -3,7 +3,13 @@ import { createContext, useState } from 'react'
 export const UserContext = createContext({})
 
 export const AuthProvider = props => {
-  const [user, setUser] = useState({ token: undefined, habits: undefined })
+  const [user, setUser] = useState({
+    token: undefined,
+    image: undefined,
+    habits: undefined,
+    todayHabits: { progress: 0, list: [] }
+  })
+
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {props.children}

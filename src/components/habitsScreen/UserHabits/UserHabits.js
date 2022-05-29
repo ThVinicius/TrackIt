@@ -3,6 +3,17 @@ import { useState, useContext } from 'react'
 import { UserContext } from '../../providers/auth'
 import { Container, ContainerCheck, Check, Icon } from './styles'
 
+function progressBar(array) {
+  let cont = 0
+  array.forEach(item => {
+    if (item.done === true) cont++
+  })
+  if (cont > 0) {
+    return parseInt((cont / array.length) * 100)
+  }
+  return cont
+}
+
 const confirm = user => {
   return window.confirm(
     `O hábito -- ${user.name} -- será deletado.\nVocê confirma essa ação?`
@@ -54,10 +65,32 @@ export default function UserHabits({ user }) {
 
     promisse
       .then(() => {
+        token.habits = token.habits.filter(item => item.id !== user.id)
+        token.todayHabits.list = token.todayHabits.list.filter(
+          item => item.id !== user.id
+        )
+
         setUser({
           ...token,
-          habits: token.habits.filter(item => item.id !== user.id)
+          todayHabits: {
+            ...token.todayHabits,
+            progress: progressBar(token.todayHabits.list)
+          }
         })
+
+        // setUser({
+        //   ...token,
+        //   habits: token.habits.filter(item => item.id !== user.id),
+        //   todayHabits: {
+        //     ...token.todayHabits,
+        //     list: token.todayHabits.list.filter(item => item.id !== user.id)
+        //   }
+        // })
+
+        // setUser({
+        //   ...token,
+        //   habits: token.habits.filter(item => item.id !== user.id)
+        // })
       })
       .catch(() => {})
   }

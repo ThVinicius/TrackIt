@@ -98,7 +98,7 @@ export default function HistoricScreen() {
 
   return (
     <Container>
-      <Header image={user.image} />
+      <Header />
       <Content>
         <h5>Histórico</h5>
         <CalendarContainer>
@@ -110,7 +110,7 @@ export default function HistoricScreen() {
         </CalendarContainer>
         <HabitDescription day={habit} />
       </Content>
-      <Footer value={66} text={'Hoje'} />
+      <Footer />
     </Container>
   )
 }

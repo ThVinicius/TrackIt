@@ -16,7 +16,7 @@ export default function Form() {
   const toSend = event => {
     event.preventDefault()
     if (loading === true) return
-    setLoading(!loading)
+    setLoading(true)
 
     const body = {
       email: input.email,
@@ -31,12 +31,14 @@ export default function Form() {
       .then(res => {
         user.image = res.data.image
         user.token = res.data.token
-        const dadosSerializados = JSON.stringify(res.data.token)
-        localStorage.setItem('token', dadosSerializados)
+        const userData = { token: res.data.token, image: res.data.image }
+        const dadosSerializados = JSON.stringify(userData)
+        localStorage.setItem('userData', dadosSerializados)
         navigate('/habitos')
       })
       .catch(() => {
-        setLoading(!loading)
+        setLoading(false)
+        alert('Usuário ou senha inválidos')
       })
   }
 

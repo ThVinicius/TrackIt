@@ -10,10 +10,11 @@ export default function LoginScreen() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token !== null) {
-      const userToken = JSON.parse(token)
-      user.token = userToken
+    const userData = localStorage.getItem('userData')
+    if (userData !== null) {
+      const aux = JSON.parse(userData)
+      user.token = aux.token
+      user.image = aux.image
       navigate('/habitos')
     }
   }, [])

@@ -1,8 +1,12 @@
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { UserContext } from '../../providers/auth'
 import { buildStyles } from 'react-circular-progressbar'
 import { Container, Progressbar, Box } from './styles'
 
-export default function Footer({ value, text }) {
+export default function Footer() {
+  const { user } = useContext(UserContext)
+
   return (
     <Container>
       <Box>
@@ -12,8 +16,8 @@ export default function Footer({ value, text }) {
       </Box>
       <Link to="/hoje">
         <Progressbar
-          value={value}
-          text={text}
+          value={user.todayHabits.progress}
+          text="Hoje"
           background
           backgroundPadding={6}
           styles={buildStyles({

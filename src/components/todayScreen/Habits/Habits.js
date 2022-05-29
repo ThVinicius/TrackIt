@@ -3,8 +3,19 @@ import { useState, useContext } from 'react'
 import { UserContext } from '../../providers/auth'
 import { ContainerHabits, Box, CheckBox, Current, Highest } from './styles'
 
-export default function Habits({ data, setListHabits, listHabits }) {
-  const { user } = useContext(UserContext)
+function progressBar(array) {
+  let cont = 0
+  array.forEach(item => {
+    if (item.done === true) cont++
+  })
+  if (cont > 0) {
+    return parseInt((cont / array.length) * 100)
+  }
+  return cont
+}
+
+export default function Habits({ data }) {
+  const { user, setUser } = useContext(UserContext)
   const [habits] = useState({
     id: data.id,
     currentSequence: data.currentSequence,
@@ -31,13 +42,17 @@ export default function Habits({ data, setListHabits, listHabits }) {
         habits.currentSequence = currentSequence + 1
       }
 
-      setListHabits({
-        ...listHabits,
-        list: listHabits.list.map(item => {
-          const { done } = item
-          if (item.id === habits.id) item.done = !done
-          return item
-        })
+      user.todayHabits.list = user.todayHabits.list.map(item => {
+        const { done } = item
+        if (item.id === habits.id) item.done = !done
+        return item
+      })
+      setUser({
+        ...user,
+        todayHabits: {
+          ...user.todayHabits,
+          progress: progressBar(user.todayHabits.list)
+        }
       })
     } else {
       const promisse = axios.post(`${URL}/uncheck`, null, config)
@@ -52,15 +67,24 @@ export default function Habits({ data, setListHabits, listHabits }) {
         habits.currentSequence = currentSequence - 1
       }
 
-      setListHabits({
-        ...listHabits,
-        list: listHabits.list.map(item => {
-          const { done } = item
-          if (item.id === habits.id) item.done = !done
-          return item
-        })
+      user.todayHabits.list = user.todayHabits.list.map(item => {
+        const { done } = item
+        if (item.id === habits.id) item.done = !done
+        return item
+      })
+      setUser({
+        ...user,
+        todayHabits: {
+          ...user.todayHabits,
+          progress: progressBar(user.todayHabits.list)
+        }
       })
     }
+  }
+
+  function day(number) {
+    if (number > 1 || number < -1) return 'dias'
+    return 'dia'
   }
 
   function colorCheck() {
@@ -88,13 +112,13 @@ export default function Habits({ data, setListHabits, listHabits }) {
           <h4>
             Sequência atual:{' '}
             <Current color={currentColor()}>
-              {habits.currentSequence} dias
+              {habits.currentSequence} {day(habits.currentSequence)}
             </Current>
           </h4>
           <h4>
             Seu recorde:{' '}
             <Highest color={highestColor()}>
-              {habits.highestSequence} dias
+              {habits.highestSequence} {day(habits.highestSequence)}
             </Highest>
           </h4>
         </Box>

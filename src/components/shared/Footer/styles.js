@@ -19,6 +19,11 @@ const Container = styled.footer`
 const Progressbar = styled(CircularProgressbar)`
   width: 91px;
   height: 91px;
+  font-size: 50px;
+
+  .CircularProgressbar-text {
+    font: normal 400 17.976px 'Lexend Deca', sans-serif;
+  }
 `
 
 const Box = styled.div`

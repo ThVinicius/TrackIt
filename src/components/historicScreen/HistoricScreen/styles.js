@@ -47,7 +47,7 @@ const CalendarContainer = styled.div`
 
     .fail {
       abbr {
-        padding: 9px 12px;
+        padding: 10px 10px;
         border-radius: 62px;
         background-color: #ea5767;
         color: #ffffff;
@@ -56,7 +56,7 @@ const CalendarContainer = styled.div`
 
     .success {
       abbr {
-        padding: 9px 12px;
+        padding: 10px 10px;
         border-radius: 62px;
         background-color: #8cc655;
         color: #ffffff;

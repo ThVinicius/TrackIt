@@ -33,7 +33,23 @@ export default function HabitDescription({ day }) {
         </Container>
       )
     }
-    return <></>
+    return (
+      <Container>
+        <h3>Legenda</h3>
+        <Box>
+          <div className="red"></div>
+          <h1>Pelo menos 1 hábito não foi concluído</h1>
+        </Box>
+        <Box>
+          <div className="green"></div>
+          <h1>Todos os hábitos foram concluídos</h1>
+        </Box>
+        <Box>
+          <div className="yellow"></div>
+          <h1>Dia de hoje</h1>
+        </Box>
+      </Container>
+    )
   }
 
   return render()

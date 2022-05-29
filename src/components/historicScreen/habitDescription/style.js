@@ -19,15 +19,37 @@ const Container = styled.div`
 
 const Box = styled.div`
   display: flex;
+  align-items: center;
   gap: 25px;
   h6 {
-    font: normal 400 17.976px 'Lexend Deca', cursive;
+    font: normal 400 15.976px 'Lexend Deca', cursive;
     color: ${props => props.color};
   }
 
   ion-icon {
     font-size: 25px;
     color: ${props => props.color};
+  }
+
+  h1 {
+    font: normal 400 12.976px 'Lexend Deca', cursive;
+  }
+  div {
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+  }
+  .red {
+    background-color: #ea5767;
+  }
+  .green {
+    background-color: #8cc655;
+  }
+  .yellow {
+    width: 25px;
+    height: 25px;
+    background-color: #ffff81;
+    border-radius: inherit;
   }
 `
 

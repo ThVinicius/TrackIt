@@ -10,6 +10,7 @@ import HabitDescription from '../habitDescription/HabitDescription'
 import { Container, Content, CalendarContainer } from './styles'
 
 const getFormatedDate = dateValue => dayjs(dateValue).format('DD/MM/YYYY')
+const formatDate = dateValue => dayjs(dateValue).format('DD')
 
 export default function HistoricScreen() {
   const [habit, setHabit] = useState({
@@ -104,6 +105,7 @@ export default function HistoricScreen() {
           <Calendar
             tileClassName={tileClassName}
             onClickDay={value => clickDay(value)}
+            formatDay={(locale, date) => formatDate(date)}
           />
         </CalendarContainer>
         <HabitDescription day={habit} />

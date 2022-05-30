@@ -13,6 +13,9 @@ const ContainerHabits = styled.div`
   h5 {
     font: normal 400 19.976px 'Lexend Deca', cursive;
     color: #666666;
+    width: 233px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   h4 {
@@ -25,6 +28,10 @@ const ContainerHabits = styled.div`
     height: 14.09vh;
     border-radius: 5px;
     padding: 0 4vw;
+
+    h5 {
+      width: 62.13vw;
+    }
   }
 `
 

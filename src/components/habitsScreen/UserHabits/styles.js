@@ -13,12 +13,19 @@ const Container = styled.div`
   h6 {
     font: normal 400 19.976px 'Lexend Deca', cursive;
     color: #666666;
+    width: 288px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   @media (max-width: 420px) {
     width: 90.66vw;
     height: 13.64vh;
     padding: 2.69vh 4.8vw;
+
+    h6 {
+      width: 76.8vw;
+    }
   }
 `
 

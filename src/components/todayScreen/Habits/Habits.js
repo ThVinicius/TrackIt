@@ -11,17 +11,24 @@ export default function Habits({ data }) {
     currentSequence: data.currentSequence,
     done: data.done,
     highestSequence: data.highestSequence,
-    sequence: data.sequence
+    sequence: data.sequence,
+    status: false
   })
 
   function checkHabits() {
+    if (habits.status === true) return
+
+    habits.status = true
+
     const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${data.id}`
     const config = { headers: { Authorization: `Bearer ${user.token}` } }
 
     const { done, currentSequence, highestSequence } = habits
     if (done === false) {
       const promisse = axios.post(`${URL}/check`, null, config)
-      promisse.then(() => {})
+      promisse.then(() => {
+        habits.status = false
+      })
 
       habits.done = true
 
@@ -46,29 +53,35 @@ export default function Habits({ data }) {
       })
     } else {
       const promisse = axios.post(`${URL}/uncheck`, null, config)
-      promisse.then(() => {})
+
+      promisse.then(() => {
+        axios
+          .get(
+            'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today',
+            config
+          )
+          .then(res => {
+            user.todayHabits.list = res.data
+
+            res.data.find(item => {
+              if (item.id === data.id) {
+                habits.currentSequence = item.currentSequence
+                habits.highestSequence = item.highestSequence
+              }
+            })
+
+            setUser({
+              ...user,
+              todayHabits: {
+                ...user.todayHabits,
+                progress: progressBar(user.todayHabits.list)
+              }
+            })
+            habits.status = false
+          })
+      })
 
       habits.done = false
-
-      if (habits.sequence === true) {
-        habits.currentSequence = currentSequence - 1
-        habits.highestSequence = highestSequence - 1
-      } else {
-        habits.currentSequence = currentSequence - 1
-      }
-
-      user.todayHabits.list = user.todayHabits.list.map(item => {
-        const { done } = item
-        if (item.id === habits.id) item.done = !done
-        return item
-      })
-      setUser({
-        ...user,
-        todayHabits: {
-          ...user.todayHabits,
-          progress: progressBar(user.todayHabits.list)
-        }
-      })
     }
   }
 

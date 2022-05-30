@@ -13,7 +13,6 @@ export default function HabitsScreen() {
   const navigate = useNavigate()
   const { user, setUser } = useContext(UserContext)
   const [addHabits, setAddHabits] = useState(false)
-  console.log(user)
 
   useEffect(() => {
     const URL =

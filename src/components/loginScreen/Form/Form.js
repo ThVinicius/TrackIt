@@ -34,7 +34,7 @@ export default function Form() {
         const userData = { token: res.data.token, image: res.data.image }
         const dadosSerializados = JSON.stringify(userData)
         localStorage.setItem('userData', dadosSerializados)
-        navigate('/habitos')
+        navigate('/hoje')
       })
       .catch(() => {
         setLoading(false)

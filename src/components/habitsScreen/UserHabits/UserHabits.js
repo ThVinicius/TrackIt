@@ -14,19 +14,19 @@ function progressBar(array) {
   return cont
 }
 
-const confirm = user => {
+const confirm = name => {
   return window.confirm(
-    `O hábito -- ${user.name} -- será deletado.\nVocê confirma essa ação?`
+    `O hábito -- ${name} -- será deletado.\nVocê confirma essa ação?`
   )
 }
 
-function userHabits(user) {
-  user.days = user.days.sort((a, b) => a - b)
+const weekdays = arrayDays => {
+  arrayDays = arrayDays.sort((a, b) => a - b)
 
   const array = []
   let aux = 0
   for (let i = 0; i < 7; i++) {
-    if (user.days[aux] === i) {
+    if (arrayDays[aux] === i) {
       array.push({ day: i, state: true })
       aux++
     } else {
@@ -36,9 +36,9 @@ function userHabits(user) {
   return array
 }
 
-export default function UserHabits({ user }) {
-  const [check] = useState(userHabits(user))
-  const { user: token, setUser } = useContext(UserContext)
+export default function UserHabits({ habit }) {
+  const [check] = useState(weekdays(habit.days))
+  const { user, setUser } = useContext(UserContext)
 
   function backGroundColor(index) {
     if (check[index].state === false) return '#FFFFFF'
@@ -50,31 +50,31 @@ export default function UserHabits({ user }) {
   }
 
   const deleteHabit = () => {
-    if (confirm(user) === false) return
+    if (confirm(habit.name) === false) return
 
     const config = {
       headers: {
-        Authorization: `Bearer ${token.token}`
+        Authorization: `Bearer ${user.token}`
       }
     }
 
     const promisse = axios.delete(
-      `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${user.id}`,
+      `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}`,
       config
     )
 
     promisse
       .then(() => {
-        token.habits = token.habits.filter(item => item.id !== user.id)
-        token.todayHabits.list = token.todayHabits.list.filter(
-          item => item.id !== user.id
+        user.habits = user.habits.filter(item => item.id !== habit.id)
+        user.todayHabits.list = user.todayHabits.list.filter(
+          item => item.id !== habit.id
         )
 
         setUser({
-          ...token,
+          ...user,
           todayHabits: {
-            ...token.todayHabits,
-            progress: progressBar(token.todayHabits.list)
+            ...user.todayHabits,
+            progress: progressBar(user.todayHabits.list)
           }
         })
       })
@@ -84,7 +84,7 @@ export default function UserHabits({ user }) {
   return (
     <Container>
       <div>
-        <h6>{user.name}</h6>
+        <h6>{habit.name}</h6>
         <ContainerCheck>
           <Check color={color(0)} backGroundColor={backGroundColor(0)}>
             D

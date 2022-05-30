@@ -15,7 +15,7 @@ export default function LoginScreen() {
       const aux = JSON.parse(userData)
       user.token = aux.token
       user.image = aux.image
-      navigate('/habitos')
+      navigate('/hoje')
     }
   }, [])
 

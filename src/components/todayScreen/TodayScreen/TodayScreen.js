@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
@@ -31,6 +32,7 @@ function weekday() {
 export default function TodayScreen() {
   const { user, setUser } = useContext(UserContext)
   const [loading] = useState({ status: undefined })
+  const navigate = useNavigate()
 
   useEffect(() => {
     const config = {
@@ -43,31 +45,35 @@ export default function TodayScreen() {
 
     const promisse = axios.get(URL, config)
 
-    promisse.then(res => {
-      if (res.data.length === 0) {
-        loading.status = false
-        setUser({
-          ...user,
-          todayHabits: { progress: 0, list: [] }
-        })
-      } else {
-        loading.status = true
-        setUser({
-          ...user,
-          todayHabits: {
-            progress: progressBar(res.data),
-            list: res.data.map(item => {
-              if (item.currentSequence === item.highestSequence) {
-                item.sequence = true
-              } else {
-                item.sequence = false
-              }
-              return item
-            })
-          }
-        })
-      }
-    })
+    promisse
+      .then(res => {
+        if (res.data.length === 0) {
+          loading.status = false
+          setUser({
+            ...user,
+            todayHabits: { progress: 0, list: [] }
+          })
+        } else {
+          loading.status = true
+          setUser({
+            ...user,
+            todayHabits: {
+              progress: progressBar(res.data),
+              list: res.data.map(item => {
+                if (item.currentSequence === item.highestSequence) {
+                  item.sequence = true
+                } else {
+                  item.sequence = false
+                }
+                return item
+              })
+            }
+          })
+        }
+      })
+      .catch(() => {
+        navigate('/')
+      })
   }, [])
 
   const completedHabits = () => {

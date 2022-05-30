@@ -7,7 +7,8 @@ export const AuthProvider = props => {
     token: undefined,
     image: undefined,
     habits: undefined,
-    todayHabits: { progress: 0, list: [] }
+    todayHabits: { progress: 0, list: [] },
+    createHabits: { name: '', days: [] }
   })
 
   return (

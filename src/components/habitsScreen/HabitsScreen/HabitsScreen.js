@@ -9,17 +9,6 @@ import UserHabits from '../UserHabits/UserHabits'
 import CreateHabits from '../CreateHabits/CreateHabits'
 import { Container, Content, Menu, ContainerHabits } from './styles'
 
-function progressBar(array) {
-  let cont = 0
-  array.forEach(item => {
-    if (item.done === true) cont++
-  })
-  if (cont > 0) {
-    return parseInt((cont / array.length) * 100)
-  }
-  return cont
-}
-
 export default function HabitsScreen() {
   const navigate = useNavigate()
   const { user, setUser } = useContext(UserContext)
@@ -35,9 +24,9 @@ export default function HabitsScreen() {
         Authorization: `Bearer ${user.token}`
       }
     }
-    const promisse1 = axios.get(URL, config)
+    const promisse = axios.get(URL, config)
 
-    promisse1
+    promisse
       .then(response => {
         user.habits = response.data
         setUser({ ...user, habits: response.data })
@@ -48,27 +37,6 @@ export default function HabitsScreen() {
       .catch(() => {
         navigate('/')
       })
-
-    const promisse2 = axios.get(`${URL}/today`, config)
-
-    promisse2
-      .then(res => {
-        setUser({
-          ...user,
-          todayHabits: {
-            progress: progressBar(res.data),
-            list: res.data.map(item => {
-              if (item.currentSequence === item.highestSequence) {
-                item.sequence = true
-              } else {
-                item.sequence = false
-              }
-              return item
-            })
-          }
-        })
-      })
-      .catch(() => {})
   }, [])
 
   function userHabits() {
@@ -90,7 +58,7 @@ export default function HabitsScreen() {
       )
     }
     return user.habits.map((item, index) => (
-      <UserHabits user={item} key={index} />
+      <UserHabits habit={item} key={index} />
     ))
   }
 

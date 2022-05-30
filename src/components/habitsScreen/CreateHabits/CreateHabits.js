@@ -8,6 +8,30 @@ import { Container, ContainerCheck, Check, Form, Box } from './styles'
 
 const today = Number(dayjs().locale('pt-br').format('d'))
 
+const weekdays = arrayDays => {
+  arrayDays = arrayDays.sort((a, b) => a - b)
+
+  const array = []
+  let aux = 0
+  for (let i = 0; i < 7; i++) {
+    if (arrayDays[aux] === i) {
+      array.push({ day: i, state: true })
+      aux++
+    } else {
+      array.push({ day: i, state: false })
+    }
+  }
+  return array
+}
+
+const days = array => {
+  const aux = []
+  array.forEach(item => {
+    if (item.state === true) aux.push(item.day)
+  })
+  return aux
+}
+
 function progressBar(array) {
   let cont = 0
   array.forEach(item => {
@@ -20,18 +44,10 @@ function progressBar(array) {
 }
 
 export default function CreateHabits({ setAddHabits }) {
-  const { user, setUser } = useContext(UserContext)
-  const [inputValue, setInputValue] = useState('')
+  const { user } = useContext(UserContext)
+  const [inputValue, setInputValue] = useState(user.createHabits.name)
   const [loading, setLoading] = useState({ value: false })
-  const [check, setCheck] = useState([
-    { day: 0, state: false },
-    { day: 1, state: false },
-    { day: 2, state: false },
-    { day: 3, state: false },
-    { day: 4, state: false },
-    { day: 5, state: false },
-    { day: 6, state: false }
-  ])
+  const [check, setCheck] = useState(weekdays(user.createHabits.days))
 
   function setState(weekday) {
     setCheck(
@@ -45,19 +61,20 @@ export default function CreateHabits({ setAddHabits }) {
     )
   }
 
+  const cancel = () => {
+    user.createHabits.name = inputValue
+    user.createHabits.days = days(check)
+
+    setAddHabits(false)
+  }
+
   const toSend = event => {
     event.preventDefault()
     if (loading.value === true) return
 
-    let cont = 0
-    const days = []
+    const arrayDays = days(check)
 
-    check.forEach(item => {
-      if (item.state === true) days.push(item.day)
-      else if (item.state === false) cont++
-    })
-
-    if (cont === check.length) {
+    if (arrayDays.length === 0) {
       alert('Escolha pelo menos um dia')
       return
     }
@@ -65,7 +82,7 @@ export default function CreateHabits({ setAddHabits }) {
 
     const body = {
       name: inputValue,
-      days: days
+      days: arrayDays
     }
     const config = {
       headers: {
@@ -82,11 +99,11 @@ export default function CreateHabits({ setAddHabits }) {
       .then(({ data }) => {
         user.habits = [
           ...user.habits,
-          { id: data.id, name: inputValue, days: days }
+          { id: data.id, name: inputValue, days: arrayDays }
         ]
 
         let day = false
-        days.find(item => {
+        arrayDays.find(item => {
           if (item === today) day = true
         })
 
@@ -97,9 +114,11 @@ export default function CreateHabits({ setAddHabits }) {
           ]
           user.todayHabits.progress = progressBar(user.todayHabits.list)
         }
+        user.createHabits.name = ''
+        user.createHabits.days = []
 
-        setAddHabits(false)
         loading.value = false
+        setAddHabits(false)
       })
       .catch(() => {
         alert('Dados incorretos')
@@ -159,7 +178,7 @@ export default function CreateHabits({ setAddHabits }) {
           </Check>
         </ContainerCheck>
         <Box>
-          <h6 onClick={() => setAddHabits(false)}>Cancelar</h6>
+          <h6 onClick={cancel}>Cancelar</h6>
           <button type="submit">{buttonLoading()}</button>
         </Box>
       </Form>

@@ -19,6 +19,13 @@ const ContainerHabits = styled.div`
     font: normal 400 12.976px 'Lexend Deca', cursive;
     color: #666666;
   }
+
+  @media (max-width: 420px) {
+    width: 90.66vw;
+    height: 14.09vh;
+    border-radius: 5px;
+    padding: 0 4vw;
+  }
 `
 
 const CheckBox = styled.div`

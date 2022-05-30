@@ -15,6 +15,10 @@ const Container = styled.div`
     font: normal 400 19.976px 'Lexend Deca', cursive;
     color: #126ba5;
   }
+
+  @media (max-width: 420px) {
+    width: 100vw;
+  }
 `
 
 const Box = styled.div`

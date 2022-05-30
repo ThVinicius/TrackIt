@@ -21,5 +21,11 @@ const Container = styled.header`
     border-radius: 98.5px;
     cursor: pointer;
   }
+
+  @media (max-width: 420px) {
+    width: 100vw;
+    height: 10.49vh;
+    padding: 0 2.66vw;
+  }
 `
 export { Container }

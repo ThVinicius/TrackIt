@@ -9,17 +9,7 @@ import Footer from '../../shared/Footer/Footer'
 import Header from '../../shared/Header/Header'
 import Habits from '../Habits/Habits'
 import { Container, Content, BoxDiv, BoxHabits } from './styles'
-
-function progressBar(array) {
-  let cont = 0
-  array.forEach(item => {
-    if (item.done === true) cont++
-  })
-  if (cont > 0) {
-    return parseInt((cont / array.length) * 100)
-  }
-  return cont
-}
+import progressBar from '../../../functions/progressBar'
 
 const now = dayjs().locale('pt-br')
 const date = now.format('DD/MM')

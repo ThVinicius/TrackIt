@@ -30,6 +30,11 @@ const Content = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   padding: 41px;
+
+  @media (max-width: 420px) {
+    width: 100vw;
+    padding: 2.99vh 10.93vw;
+  }
 `
 
 const BoxDiv = styled.div`
@@ -43,11 +48,20 @@ const BoxDiv = styled.div`
     font: normal 400 17.976px 'Lexend Deca', cursive;
     color: #8fc549;
   }
+
+  @media (max-width: 420px) {
+    width: 90.66vw;
+    margin-bottom: 4.19vh;
+  }
 `
 const BoxHabits = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  @media (max-width: 420px) {
+    gap: 1.49vh;
+  }
 `
 
 export { Container, Content, BoxDiv, BoxHabits }

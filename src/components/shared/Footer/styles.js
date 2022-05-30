@@ -14,12 +14,17 @@ const Container = styled.footer`
     font: normal 400 17.976px 'Lexend Deca', cursive;
     color: #52b6ff;
   }
+
+  @media (max-width: 420px) {
+    width: 100vw;
+    height: 10.49vh;
+    padding: 0 8.26vw;
+  }
 `
 
 const Progressbar = styled(CircularProgressbar)`
   width: 91px;
   height: 91px;
-  font-size: 50px;
 
   .CircularProgressbar-text {
     font: normal 400 17.976px 'Lexend Deca', sans-serif;

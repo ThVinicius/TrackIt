@@ -6,6 +6,12 @@ const Container = styled.div`
   background-color: #ffffff;
   border-radius: 5px;
   padding: 18px;
+
+  @media (max-width: 420px) {
+    width: 90.66vw;
+    height: 26.98vh;
+    padding: 2.69vh 4.8vw;
+  }
 `
 
 const ContainerCheck = styled.div`
@@ -44,6 +50,13 @@ const Form = styled.form`
     color: #dbdbdb;
     padding: 0 11px;
   }
+
+  @media (max-width: 420px) {
+    input {
+      width: 80.8vw;
+      padding-left: 2.93vw;
+    }
+  }
 `
 const Box = styled.div`
   width: 303px;
@@ -71,6 +84,12 @@ const Box = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  @media (max-width: 420px) {
+    width: 80.8vw;
+    margin-top: 5.39vh;
+    gap: 6.13vw;
   }
 `
 export { Container, ContainerCheck, Check, Form, Box }

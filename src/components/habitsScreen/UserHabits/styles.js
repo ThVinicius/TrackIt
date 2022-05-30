@@ -14,6 +14,12 @@ const Container = styled.div`
     font: normal 400 19.976px 'Lexend Deca', cursive;
     color: #666666;
   }
+
+  @media (max-width: 420px) {
+    width: 90.66vw;
+    height: 13.64vh;
+    padding: 2.69vh 4.8vw;
+  }
 `
 
 const ContainerCheck = styled.div`
@@ -39,6 +45,11 @@ const Icon = styled.div`
   height: 91px;
   padding-top: 11px;
   cursor: pointer;
+
+  @media (max-width: 420px) {
+    height: 13.64vh;
+    padding-top: 1.64vh;
+  }
 `
 
 export { Container, ContainerCheck, Check, Icon }

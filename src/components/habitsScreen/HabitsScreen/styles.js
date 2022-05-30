@@ -16,6 +16,12 @@ const Content = styled.div`
   padding-bottom: 36px;
   overflow: auto;
   overflow-x: hidden;
+
+  @media (max-width: 420px) {
+    width: 100vw;
+    padding-top: 2.99vh;
+    padding-bottom: 5.31vh;
+  }
 `
 const Menu = styled.div`
   width: 375px;
@@ -41,6 +47,11 @@ const Menu = styled.div`
     align-items: center;
     cursor: pointer;
   }
+
+  @media (max-width: 420px) {
+    width: 100vw;
+    padding: 0 4.53vw;
+  }
 `
 const ContainerHabits = styled.div`
   margin-top: 28px;
@@ -53,6 +64,12 @@ const ContainerHabits = styled.div`
   h4 {
     font: normal 400 17.976px 'Lexend Deca', cursive;
     color: #666666;
+  }
+
+  @media (max-width: 420px) {
+    margin-top: 4.19vh;
+    padding: 0 4.53vw;
+    gap: 1.49vh;
   }
 `
 

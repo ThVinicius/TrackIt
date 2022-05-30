@@ -2,38 +2,13 @@ import axios from 'axios'
 import { useState, useContext } from 'react'
 import { UserContext } from '../../providers/auth'
 import { Container, ContainerCheck, Check, Icon } from './styles'
-
-function progressBar(array) {
-  let cont = 0
-  array.forEach(item => {
-    if (item.done === true) cont++
-  })
-  if (cont > 0) {
-    return parseInt((cont / array.length) * 100)
-  }
-  return cont
-}
+import progressBar from '../../../functions/progressBar'
+import weekdays from '../../../functions/weekdays'
 
 const confirm = name => {
   return window.confirm(
     `O hábito -- ${name} -- será deletado.\nVocê confirma essa ação?`
   )
-}
-
-const weekdays = arrayDays => {
-  arrayDays = arrayDays.sort((a, b) => a - b)
-
-  const array = []
-  let aux = 0
-  for (let i = 0; i < 7; i++) {
-    if (arrayDays[aux] === i) {
-      array.push({ day: i, state: true })
-      aux++
-    } else {
-      array.push({ day: i, state: false })
-    }
-  }
-  return array
 }
 
 export default function UserHabits({ habit }) {

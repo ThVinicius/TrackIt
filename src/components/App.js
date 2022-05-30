@@ -18,8 +18,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<LoginScreen />} />
           <Route path="/cadastro" element={<RegisterScreen />} />
-          <Route path="/habitos" element={<HabitsScreen />} />
           <Route path="/hoje" element={<TodayScreen />} />
+          <Route path="/habitos" element={<HabitsScreen />} />
           <Route path="/historico" element={<HistoricScreen />} />
         </Routes>
       </AuthProvider>

@@ -33,6 +33,19 @@ const Content = styled.div`
     font: normal 400 17.976px 'Lexend Deca', cursive;
     color: #666666;
   }
+
+  @media (max-width: 420px) {
+    width: 100vw;
+    padding-top: 2.99vh;
+    padding: 0 4.53vw;
+    padding-bottom: 5.39vh;
+
+    h5 {
+      width: 100vw;
+      padding: 0 4.53vw;
+      margin: 2.54vh 0;
+    }
+  }
 `
 
 const CalendarContainer = styled.div`
@@ -61,6 +74,12 @@ const CalendarContainer = styled.div`
         background-color: #8cc655;
         color: #ffffff;
       }
+    }
+  }
+
+  @media (max-width: 420px) {
+    .react-calendar {
+      width: 93.33vw;
     }
   }
 `

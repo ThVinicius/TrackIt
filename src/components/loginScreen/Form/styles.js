@@ -32,5 +32,11 @@ const Container = styled.form`
     align-items: center;
     opacity: ${props => props.opacity};
   }
+  @media (max-width: 420px) {
+    input,
+    button {
+      width: 80.8vw;
+    }
+  }
 `
 export { Container }

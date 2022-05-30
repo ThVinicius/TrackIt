@@ -5,24 +5,10 @@ import dayjs from 'dayjs'
 import { UserContext } from '../../providers/auth'
 import { ThreeDots } from 'react-loader-spinner'
 import { Container, ContainerCheck, Check, Form, Box } from './styles'
+import weekdays from '../../../functions/weekdays'
+import progressBar from '../../../functions/progressBar'
 
 const today = Number(dayjs().locale('pt-br').format('d'))
-
-const weekdays = arrayDays => {
-  arrayDays = arrayDays.sort((a, b) => a - b)
-
-  const array = []
-  let aux = 0
-  for (let i = 0; i < 7; i++) {
-    if (arrayDays[aux] === i) {
-      array.push({ day: i, state: true })
-      aux++
-    } else {
-      array.push({ day: i, state: false })
-    }
-  }
-  return array
-}
 
 const days = array => {
   const aux = []
@@ -30,17 +16,6 @@ const days = array => {
     if (item.state === true) aux.push(item.day)
   })
   return aux
-}
-
-function progressBar(array) {
-  let cont = 0
-  array.forEach(item => {
-    if (item.done === true) cont++
-  })
-  if (cont > 0) {
-    return parseInt((cont / array.length) * 100)
-  }
-  return cont
 }
 
 export default function CreateHabits({ setAddHabits }) {

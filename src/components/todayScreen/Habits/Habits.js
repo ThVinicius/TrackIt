@@ -2,17 +2,7 @@ import axios from 'axios'
 import { useState, useContext } from 'react'
 import { UserContext } from '../../providers/auth'
 import { ContainerHabits, Box, CheckBox, Current, Highest } from './styles'
-
-function progressBar(array) {
-  let cont = 0
-  array.forEach(item => {
-    if (item.done === true) cont++
-  })
-  if (cont > 0) {
-    return parseInt((cont / array.length) * 100)
-  }
-  return cont
-}
+import progressBar from '../../../functions/progressBar'
 
 export default function Habits({ data }) {
   const { user, setUser } = useContext(UserContext)

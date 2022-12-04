@@ -1,70 +1,118 @@
-# Getting Started with Create React App
+# projeto TrackIt
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
 
-## Available Scripts
+  <h3>Built With</h3>
 
-In the project directory, you can run:
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" height="30px"/>
+  
+</div>
 
-### `npm start`
+<br/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Descrição
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+TrackIt é uma aplicação de acompanhamento de hábitos.
 
-### `npm test`
+</br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Funcionalidades
 
-### `npm run build`
+- Criar uma conta e acessá-la
+- Criar um hábito
+- Marcar ou desmarcar um hábito feito.
+- Visualizar o histórico de hábitos
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+</br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Rotas
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### rotas de autenticação
 
-### `npm run eject`
+São as rotas / (login) e /cadastro (cadastro)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<h1 align="center" >
+<img alt="gif" src="./src/assets/videos/signUpAndSignIn.gif">
+</h1>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### /habitos
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Nessa rota é onde se gerencia os hábitos
 
-## Learn More
+Nela é possivel:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Visualizar todos os hábitos criados pelo usuário.
+- Criar um hábito.
+- Deletar um hábito.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<h1 align="center" >
+<img alt="gif" src="./src/assets/videos/create.gif">
+</h1>
 
-### Code Splitting
+#
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### /hoje
 
-### Analyzing the Bundle Size
+Nessa rota é onde se gerencia os hábitos de hoje.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Nela é possivel:
 
-### Making a Progressive Web App
+- Visualizar os hábitos de hoje.
+- Marcar os hábitos como feito.
+- Desmarcar um hábito feito como não feito.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<h1 align="center" >
+<img alt="gif" src="./src/assets/videos/today.gif">
+</h1>
 
-### Advanced Configuration
+#
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### /historico
 
-### Deployment
+Nessa rota é possivel visualizar o histórico dos hábitos.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Nela é possivel:
 
-### `npm run build` fails to minify
+- Clicar nos dias para listar quais hábitos foi concluido e quais não foram
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<h1 align="center" >
+<img alt="gif" src="./src/assets/videos/historic.gif">
+</h1>
+
+#
+
+## Rodar localmente
+
+Clone o projeto
+
+```bash
+  git clone https://github.com/ThVinicius/TrackIt.git
+```
+
+Vá para o diretorio do projeto
+
+```bash
+  cd TrackIt
+```
+
+Instale as dependencias
+
+```bash
+  npm install
+```
+
+Inicie o servidor
+
+```bash
+  npm start
+```
+
+#
+
+## Acknowledgements
+
+- [Awesome Badges](https://github.com/Envoy-VC/awesome-badges)
+
+</br>
